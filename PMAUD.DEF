@@ -1,0 +1,13 @@
+;--------------------------------------
+; PMAUD.DEF module definition file v1.1
+;--------------------------------------
+
+NAME           PMAUD  WINDOWAPI
+
+DESCRIPTION    'Transparent audio player v1.1 (PM version) by Ryan C. Gordon.'
+STACKSIZE      20000
+BASE=0x10000
+PROTMODE
+
+; End of PMAUD.DEF
+

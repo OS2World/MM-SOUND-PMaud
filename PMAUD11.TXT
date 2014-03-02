@@ -1,0 +1,204 @@
+I hate OS/2's digital audio player.
+
+
+
+
+Ok, don't get me wrong; it works well, and can be handy. But when you are
+pouring through several (or worse, several hundred) .WAV files in one folder,
+having to deal with that thing gets on my nerves.
+
+
+
+So, I wrote a replacement.
+
+
+
+WHAT IS THIS THING, ANYHOW?
+---------------------------
+This is PMaud. It's the world's simplest Presentation Manager program. It
+simply takes a command line of a file (or several files), and plays them all.
+No windows. No buttons. No overhead or extra mouse clicks.
+
+
+HERE'S HOW TO INSTALL THE THING:
+--------------------------------
+1) Make sure you have the EMX runtime installed on your system.
+   This can be found at ftp://hobbes.nmsu.edu/os2/unix/emx09b/emxrt.zip,
+   or on many OS/2-related BBSes. (LOTS of fine OS/2 products use this, so
+   you're probably going to have to get it eventually, anyhow...hey, it's free,
+   so why not?)
+2) copy the .EXEs to your favorite place. Somewhere in the path'd be nice.
+3) Find a nice quiet place to hide an icon on your desktop. I stick them in
+   OS/2 system/Productivity, myself.
+4) Open the Templates folder. Drag a 'Program' template to your nice quiet
+   place, and when the Program Settings notebook opens...
+5) ...Set the filename to whatever directory PMaud.exe is in, and the filename.
+   (i.e. -- c:\nifties\pmaud.exe)
+6) Leave the rest of the fields blank.
+7) Click on the 'Associations' notebook tab.
+8) Find 'Digital Audio'...add it.
+9) Also, add *.WAV, *.IFF, *.AIF, *.AU, and *.SND, as well.
+10) Click on the 'General' notebook tab.
+11) Change the name to 'PMaud'...make an icon, if you choose.
+12) Find the WEPM.EXE icon, in your MMOS2 directory.
+13) Right-click it, select 'settings'.
+14) Click on the 'Associations' notebook tab.
+15) Remove 'Digital Audio', and all the file extensions.
+
+(if you are really daring, you could set both apps up to handle the same
+associations, so both programs are on a sound object's 'OPEN' menu, but I
+prefer this, as I never really do any .WAV editing...)
+
+There we are! Whew!
+
+
+HOW TO USE PMAUD:
+-----------------
+Now, open up a drive object, find a sound object (something with a .WAV
+extension...try in the \mmos2\sounds directory), and double-click it. It should
+play the sound file without (forgive the pun) the extra bells and whistles.
+
+You can also, if you don't choose to keep the 'program' icon you pulled off
+the template for PMaud in a nice quiet place...that is, right on your desktop
+or somewhere convenient, you can also drag sound file objects and drop them
+onto the PMaud icon. That will play them as well.
+
+If you want to pass a command line to PMaud, in the settings notebook for it,
+under 'Parameters' on the 'Program' page, put (without the quotes)
+
+"[Sound file to play?]"
+
+And you will be prompted when PMaud loads for a filename. (This works for any
+OS/2 program, put something in "[]" in the parameters field of any program
+object, and it'll prompt you before loading.)
+
+
+WEBEXPLORER INSTALLATION:
+-------------------------
+If you want to use PMaud with WebExplorer, and get 'transparent' sound
+playback, follow these steps...
+
+1) Load up WebExplorer.
+2) Click on the 'Configure' menu.
+3) Select 'Viewers'
+4) Find these types : "WAV audio format",
+                      "AU audio format",
+                  and "AIF/AIFF/AIFC audio format".
+5) For all of these, put "x:\path\pmaud.exe" in the 'program' field, where
+   "x:\path\" is the drive and directory where you put pmaud.exe.
+
+
+Now, next time you follow a link to a .WAV, .AU, or .AIF? file, it'll simply
+play it without the extra overhead and fanfare of WebExplorer's (lousy)
+sound player.
+
+One warning, though. You'll probably be downloading the sound file everytime
+you want to hear it by this method, as PMaud discards the file after playback,
+with no chance or option to save the file. (Of course, it's likely that file
+is sitting in your \tcpip\tmp directory, but with a cryptic filename.) As you
+can see, not having a 'Save As...' menu option, or a menu at all can be a
+blessing and a curse.
+
+
+HOW TO CHANGE THESE PROGRAMS' ICONS:
+------------------------------------
+     (for the newbie OS/2 programmer...)
+1) Edit the file PMAUD.RC with your favorite text editor.
+2) Find the line "POINTER 1 wavrec.ico"
+3) change "wavrec.ico" to a path\filename on your system. After this procedure
+   is done, you won't need to keep that icon anymore if you don't want it.
+   (That is to say, a copy of it will be attached to the .EXEs; OS/2 won't
+   be reading that icon from the file you specify.)
+4) save the file and quit your text editor.
+5) from the command line, type 
+
+      rc pmaud.rc pmaud.exe
+      rc pmaud.rc audt.exe
+
+(rc.exe is a program that comes with OS/2...it's in your path somewhere, in all
+likelyhood)
+
+There! Now, there should be a new icon attached to this file. Run this copy of
+audt.exe from a OS/2 Window...did your icon appear in the control box in the
+upper left hand corner?  Good. It worked.
+
+You don't need to keep any of the files in this archive except the .EXEs you
+want in order for PMaud or audt to run correctly.
+
+
+ALSO INCLUDED:
+--------------
+The source code is in this archive. It's real simple. This was written with
+EMX 0.9b and the multimedia import libraries. (You can find all this stuff at
+ftp://hobbes.nmsu.edu/os2/unix/emx09b/  ...the multimedia libs are one more
+directory down in /contrib/mm4emx10.zip) If EMX is installed correctly, the
+makefile should compile these with no complaints.
+
+Also included is the source code (all...oh, say, FIVE lines of it) and program
+audt.exe...this is the same as PMaud, but it is a 'VIO' program (that is, it
+runs in an 'OS/2 Window' or 'OS/2 Full Screen' session.) The command line
+is the same...this can be handy for adding some life to batch (*.cmd) files and
+such. Be creative with it. It can handle wildcards (so can PMaud). So if I were
+to run "audt.exe c:\mmos2\sounds\*.wav", it'd run all the .WAV files in my
+MMOS/2 sound bytes directory.
+
+
+HARDWARE/SOFTWARE SUPPORTED:
+----------------------------------------
+Theoretically, PMaud should handle any sound file that MMOS/2 understands.
+(However, I have only tested .WAV, .AU, and .SND files with it...My Ensoniq
+Soundscape doesn't do MIDI playback due to a pathetically piss-poor driver.
+Ever see Ensoniq's Win95 driver for this card? Absolutely FEATURE PACKED;
+it has full-duplex support, SB emulation for DOS windows, all sorts of volume
+controls, and the joystick port on it works. However, they have recently opted
+to discontinue their BETA OS/2 Warp driver, which has NONE of the above
+features. What PMaud does on my system is the extent of what the Ensoniq
+Soundscape drivers for Warp do. Everyone bitch at Ensoniq and get them to get
+their asses in gear for OS/2, eh?  Good. So someone pass this thing a MIDI file
+on the command line, and see if it plays it, then get back to me.)
+
+Anyhow, ranting aside, this has only been tested under Warp red-spine, but it
+should, in all likelyhood, work with any OS/2 from 2.0 up, with Multimedia
+installed. Although, before we get too far from the topic of device drivers,
+this program opens the digital audio device (your soundcard) in SHARED mode.
+That is, other programs may use it at the same time as PMaud, even other
+instances of PMaud. (If you double-click on a second sound object before the
+first one completes playback, for example). However, depending on what kind of
+sound card is in your machine, and what the drivers choose to do is beyond my
+control. Some may mix and play both sounds at once (which is super-cool!), or,
+like my card, it may choose to end playback of the first sound, and play the
+second. I'd be curious to know how different setups handle this; please feel
+free to email me and let me know what your computer does.
+
+
+FREEWARE:
+---------
+There is no charge to use these programs. Although I'd really appreciate an
+email if you like (or even if you don't like) them, so I know people are using
+(or at least noticing) my work.
+
+
+FINAL THOUGHTS:
+---------------
+To conclude, a BIG thanks to jcc on IRC's #os/2 channel for all his help
+passing my programs around. /me gives jcc big hug.  :)
+
+So, another freeware app, to make life a little simpler for us Warpers. Enjoy.
+                               --Ryan C. Gordon (mailto:warped42@ix.netcom.com)
+
+
+VERSION HISTORY:
+----------------
+v1.0 : Works. Works well. Love it.
+v1.1 : Shrunk the EXEs by about 80% through various compiler options.
+       Default icon added to .exe files.
+       Updated the docs to make it a wee bit clearer.
+       Added a section on how to change the default icon, and this history.
+       Added wildcard expansion (being the only NON-API library call in
+         the entire program)
+
+(who'd've thought I could write so much documentation for such a TINY
+ program?!  heheh...)
+
+
+
